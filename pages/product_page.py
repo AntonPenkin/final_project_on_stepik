@@ -8,7 +8,7 @@ class ProductPage(BasePage):
         cart.click()
 
     def checking_the_item_in_the_cart(self):
-        assert self.browser.find_element(*ProductPageLocators.BOOK_NAME).text == self.browser.find_element(*ProductPageLocators.BOOK_NAME_SUCCESS).text, "The wrong book"
+        assert self.browser.find_element(*ProductPageLocators.BOOK_NAME).text == self.browser.find_element(*ProductPageLocators.BOOK_NAME_SUCCESS).text, "The title of the book is different"
 
     def checking_the_price_of_goods(self):
-        assert self.browser.find_element(*ProductPageLocators.BOOK_PRICE).text == self.browser.find_element(*ProductPageLocators.BOOK_PRICE_INFO).text, "The wrong price"
+        assert self.browser.find_element(*ProductPageLocators.BOOK_PRICE).text == self.browser.find_element(*ProductPageLocators.BOOK_PRICE_INFO).text, "The price of the book is different"
