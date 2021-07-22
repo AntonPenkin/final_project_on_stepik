@@ -1,8 +1,8 @@
 from .pages.product_page import ProductPage
+from .pages.basket_page import BasketPage
 import pytest
 
 
-@pytest.mark.skip
 @pytest.mark.parametrize('promo_offer',
                          ['0', '1', '2', '3', '4', '5', '6', pytest.param('7', marks=pytest.mark.xfail), '8', '9'])
 def test_guest_can_add_product_to_basket(browser, promo_offer):
@@ -15,7 +15,6 @@ def test_guest_can_add_product_to_basket(browser, promo_offer):
     page.checking_the_price_of_goods()
 
 
-@pytest.mark.skip
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
     page = ProductPage(browser, link)
@@ -31,7 +30,6 @@ def test_guest_cant_see_success_message(browser):
     page.checking_no_success_message_after_adding_product_to_basket()
 
 
-@pytest.mark.skip
 def test_message_dissapeared_after_adding_product_to_basket(browser):
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
     page = ProductPage(browser, link)
@@ -52,3 +50,12 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     page = ProductPage(browser, link)
     page.open()
     page.go_to_login_page()
+
+
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    link = "https://selenium1py.pythonanywhere.com/catalogue/neuromancer_13/"
+    page = BasketPage(browser, link)
+    page.open()
+    page.go_to_basket_page()
+    page.should_be_no_items_in_the_cart()
+    page.should_be_an_empty_shopping_cart_notice()
