@@ -6,7 +6,7 @@ import pytest
 
 @pytest.mark.login_guest
 class TestLoginFromMainPage:
-    # Переходит на страницу входа (login) и проверяет действительно ли открылась страница входа (login),
+    # Переходит на страницу авторизации (login) и проверяет действительно ли открылась страница авторизации (login),
     # есть ли на странице форма "Входа", форма "Регистрации"
     def test_guest_can_go_to_login_page(self, browser):
         link = "http://selenium1py.pythonanywhere.com/"
@@ -16,7 +16,7 @@ class TestLoginFromMainPage:
         page_login = LoginPage(browser, browser.current_url)
         page_login.should_be_login_page()
 
-    # Проверяет, есть ли на заданной странице, ссылка на страницу входа (login)
+    # Проверяет, есть ли на заданной странице, ссылка на страницу авторизации (login)
     def test_guest_should_see_login_link(self, browser):
         link = "http://selenium1py.pythonanywhere.com/"
         page = MainPage(browser, link)
