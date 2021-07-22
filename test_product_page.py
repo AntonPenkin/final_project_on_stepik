@@ -7,8 +7,8 @@ import time
 
 @pytest.mark.login
 class TestUserAddToBasketFromProductPage:
-    # Данная фикстура перед каждым тестом в данном классе заходит на страницу входа (Login) и регистрирует нового
-    # пользователя, а также после регистрации проверяет залогинен ли пользователь
+    # Данная фикстура перед каждым тестом в данном классе заходит на страницу авторизации (Login) и регистрирует нового
+    # пользователя, а также после регистрации проверяет авторизован ли пользователь
     @pytest.fixture(scope="function", autouse=True)
     def setup(self, browser):
         link = "https://selenium1py.pythonanywhere.com/accounts/login/"
@@ -17,7 +17,7 @@ class TestUserAddToBasketFromProductPage:
         page.register_new_user(str(time.time()) + "@mail.ru", "1qazXSW@!")
         page.should_be_authorized_user()
 
-    # Проверяет, может ли залогиненный пользователь добавить товар в корзину, а также после добавления в корзину
+    # Проверяет, может ли авторизованный пользователь добавить товар в корзину, а также после добавления в корзину
     # сравнивает название и цену товара
     @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser):
@@ -37,7 +37,7 @@ class TestUserAddToBasketFromProductPage:
         page.checking_no_success_message_after_adding_product_to_basket()
 
 
-# Проверяет, может ли не залогиненный пользователь добавить товар в корзину, а также после добавления в корзину
+# Проверяет, может ли не авторизованный пользователь добавить товар в корзину, а также после добавления в корзину
 # сравнивает название и цену товара
 @pytest.mark.need_review
 @pytest.mark.parametrize('promo_offer',
@@ -82,7 +82,7 @@ def test_message_dissapeared_after_adding_product_to_basket(browser):
     page.checking_message_disappeared_after_adding_product_to_basket()
 
 
-# Заходит на страницу товара и проверяет, есть ли на странице ссылка на страницу входа (login)
+# Заходит на страницу товара и проверяет, есть ли на странице ссылка на страницу авторизации (login)
 def test_guest_should_see_login_link_on_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(browser, link)
@@ -90,7 +90,7 @@ def test_guest_should_see_login_link_on_product_page(browser):
     page.should_be_login_link()
 
 
-# Заходит на страницу товара и переходит с нее на страницу входа (login)
+# Заходит на страницу товара и переходит с нее на страницу авторизации (login)
 @pytest.mark.need_review
 def test_guest_can_go_to_login_page_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
